@@ -2,12 +2,12 @@ import mongoose from 'mongoose';
 import { ScreeningResultRepositoryPort } from './ScreeningResultRepositoryPort';
 import { VacancyDocument, VacancyDocumentSchema } from '../vacancy/VacancyModel';
 import { ApplicantDocument, ApplicantDocumentSchema, ApplicantIdentity } from '../applicant/ApplicantModel';
-import { ScreeningIdentity } from './ScreningModel';
+import { ScreeningIdentity, ScreeningResult } from './ScreningModel';
 
 export class ScreeningResultMongDbRepositoryAdapter implements ScreeningResultRepositoryPort {
     constructor(private readonly connection: mongoose.Connection) { }
 
-    async Get(screening: ScreeningIdentity): Promise<any[]> {
+    async Get(screening: ScreeningIdentity): Promise<ScreeningResult[]> {
         const applicantModel = this.connection.model<ApplicantDocument>('Applicant', ApplicantDocumentSchema);
         const applicant = await applicantModel.findById(screening.applicantId).populate("profileFootPrint");
         if(applicant) {
@@ -16,7 +16,7 @@ export class ScreeningResultMongDbRepositoryAdapter implements ScreeningResultRe
             const result = await vacancyModel
                 .aggregate(
                 [
-                    { $project: { title:1, matchesProfile: { $setIsSubset: [ "$profileFootPrint", applicant.profileFootPrint ] }, _id:0 } }
+                    { $project: { title:1, eligible: { $setIsSubset: [ "$profileFootPrint", applicant.profileFootPrint ] }, _id:0 } }
                 ]
             ).exec();
     

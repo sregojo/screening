@@ -46,3 +46,8 @@ export const QuestionResponseSchema = Joi.object<QuestionResponse>({
     questionId: JoiExtensions.MongoDbObjectId,
     responseId: JoiExtensions.MongoDbObjectId,
 });
+
+export interface ScreeningResult { 
+    title: string, 
+    eligible: boolean,
+}

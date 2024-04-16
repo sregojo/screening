@@ -1,5 +1,5 @@
-import { ScreeningIdentity } from "./ScreningModel";
+import { ScreeningIdentity, ScreeningResult } from "./ScreningModel";
 
 export interface ScreeningResultRepositoryPort {
-    Get(screening: ScreeningIdentity): Promise<any[]>;
+    Get(screening: ScreeningIdentity): Promise<ScreeningResult[]>;
 }
