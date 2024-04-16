@@ -2,7 +2,10 @@ import { Request, Response } from 'express';
 import mongoose from 'mongoose';
 
 export class HealthCheckController {
-    constructor(private readonly connection: mongoose.Connection) { }
+    constructor(private readonly connection: mongoose.Connection) { 
+        this.GetReady = this.GetReady.bind(this);
+        this.GetLive = this.GetLive.bind(this);
+    }
 
     public GetReady(req: Request, res: Response): Response {
         switch(this.connection.readyState) {
