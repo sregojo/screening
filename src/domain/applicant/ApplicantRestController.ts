@@ -9,7 +9,7 @@ export class ApplicantRestController extends ExpressRestControllerBase {
         super();
     }
 
-    public async Post(req: Request, res: Response):  Promise<Response> {         
+    public async Post(req: Request, res: Response):  Promise<Response> {
         const data = ApplicantDataSchema.validate(req.body);
         if (data.error) {
           return res.status(400).send(data.error.message);

@@ -1,6 +1,13 @@
 import { Request, Response } from 'express';
 
-export abstract class ExpressRestControllerBase {
+export interface ExpressRestController {
+    Post(req: Request, res: Response):  Promise<Response>;
+    Put(req: Request, res: Response): Promise<Response>;
+    Get(req: Request, res: Response): Promise<Response>;
+    Delete(req: Request, res: Response): Promise<Response>;
+}
+
+export abstract class ExpressRestControllerBase implements ExpressRestController {
     constructor() {
         // TODO: Needed to use the instance of the class in express router
         this.Post = this.Post.bind(this);

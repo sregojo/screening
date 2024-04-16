@@ -13,15 +13,16 @@ import { QuestionRestController } from '../domain/question/QuestionRestControlle
 import { ScreeningRestController } from '../domain/screening/ScreeningRestController';
 import { ScreeningResultRestController } from '../domain/screening/ScreeningResultRestController';
 import { ScreeningResultMongDbRepositoryAdapter } from '../domain/screening/ScreeningResultMongDbRepositoryAdapter';
+import { ExpressRestController } from './base/RestControllerBase';
 
 type Controllers = {
     healthCheck: HealthCheckController;
-    applicant: ApplicantRestController;
-    company: CompanyRestController;
-    question: QuestionRestController;
-    vacancy: VacancyRestController;
-    screening: ScreeningRestController;
-    screeningResult: ScreeningResultRestController
+    applicant: ExpressRestController;
+    company: ExpressRestController;
+    question: ExpressRestController;
+    vacancy: ExpressRestController;
+    screening: ExpressRestController;
+    screeningResult: ExpressRestController
 };
 
 export class ApiService extends ExpressApiServiceBase<Controllers> {
